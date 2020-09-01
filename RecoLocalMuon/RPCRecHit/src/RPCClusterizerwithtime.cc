@@ -1,18 +1,22 @@
-#include "RPCClusterizer.h"
+#include "RPCClusterizerwithtime.h"
 //#include "RPCCluster.h"
 #include <iostream> // tests
 
-RPCClusterContainer RPCClusterizer::doAction(const RPCDigiCollection::Range& digiRange)
+RPCClusterContainer RPCClusterizerwithtime::doAction(const RPCDigiCollection::Range& digiRange)
 {
   RPCClusterContainer initialCluster, finalCluster;
   // Return empty container for null input
   if ( std::distance(digiRange.second, digiRange.first) == 0 ) return finalCluster;
+   float  cl_time = 0;
+   float  thrTime=23.4;
+   //
   // Start from single digi recHits
   for ( auto digi = digiRange.first; digi != digiRange.second; ++digi ) {
     RPCCluster cl(digi->strip(), digi->strip(), digi->bx());
     if ( digi->hasTime() ) cl.addTime(digi->time());
     if ( digi->hasY() ) cl.addY(digi->coordinateY());
     initialCluster.insert(cl);
+    cl_time= cl.time();
 }
   if ( initialCluster.empty() ) return finalCluster; // Confirm the collection is valid
 
@@ -22,7 +26,7 @@ RPCClusterContainer RPCClusterizer::doAction(const RPCDigiCollection::Range& dig
   // Loop over the remaining digis
   // Note that the last one remains as open in this loop
   for ( auto cl = std::next(initialCluster.begin()); cl != initialCluster.end(); ++cl ) {
-  if ( prev.isAdjacent(*cl) /* && abs( prev.time()- cl_time) < thrTime*/  ) {
+  if ( prev.isAdjacent(*cl)  && abs( prev.time()- cl_time) < thrTime  ) {
       // Merged digi to the previous one
       prev.merge(*cl);
     }
@@ -30,7 +34,7 @@ RPCClusterContainer RPCClusterizer::doAction(const RPCDigiCollection::Range& dig
       // Close the previous cluster and start new cluster
       finalCluster.insert(prev);
       prev = *cl;
- //     std::cout<<"**************prev.time() ="<<prev.time()<<std::endl;
+      std::cout<<"**************prev.time() ="<<prev.time()<<std::endl;
 
     
     }

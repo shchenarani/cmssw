@@ -3,7 +3,8 @@
  */
 
 #include "RPCCluster.h"
-#include "RPCClusterizer.h"
+//#include "RPCClusterizer.h"
+#include "RPCClusterizerwithtime.h"
 #include "RPCMaskReClusterizer.h"
 
 RPCClusterContainer RPCMaskReClusterizer::doAction(const RPCDetId& id,
