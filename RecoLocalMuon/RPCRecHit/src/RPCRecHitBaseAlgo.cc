@@ -74,13 +74,13 @@ edm::OwnVector<RPCRecHit> RPCRecHitBaseAlgo::reconstruct(const RPCRoll& roll,
         hits.push_back(recHit);
                                      }
 
-    for ( auto hit : hits ) {
-    for ( auto hit2: hits2 ) {
-    //std::cout << hit.localPosition().y() << " " << hit.localPosition().x() << std::endl;
-    //std::cout << hit2.localPosition().y() << " " << hit2.localPosition().x() << std::endl;
-    if (hit.time() == hit2.time() &&  int(hit.localPosition().x()) == int(hit2.localPosition().x()) && int(hit.localPosition().y()) == int(hit2.localPosition().y())  ) {
+  for ( auto hit2 : hits2 ) {
+  for ( auto hit: hits) {
+    //std::cout <<  " " << hit.localPosition().x() << std::endl;
+  //  std::cout <<  " " << hit2.localPosition().x() << std::endl;
+      if (hit.time() != hit2.time() &&  int(hit.localPosition().x()) != int(hit2.localPosition().x())   ) {
        
-        result.push_back(hit);
+        result.push_back(hit2);
    }
  }
 }

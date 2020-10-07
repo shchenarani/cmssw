@@ -3,8 +3,10 @@ from WMCore.Configuration import Configuration
 config = Configuration()
 #General section: In this section, the user specifies generic parameters about the request (e.g. request name). 
 config.section_('General')
-config.General.requestName ='same_notimetime23p4'
-config.General.workArea = 'crab_project_31Agu'
+config.General.requestName ='crab_notimetime1p56_29Sep'
+
+
+config.General.workArea = 'crab_project_29Sep'
 config.General.transferOutputs = True
 config.General.transferLogs = False
 

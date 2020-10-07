@@ -8,7 +8,7 @@ RPCClusterContainer RPCClusterizerwithtime::doAction(const RPCDigiCollection::Ra
   // Return empty container for null input
   if ( std::distance(digiRange.second, digiRange.first) == 0 ) return finalCluster;
    float  cl_time = 0;
-   float  thrTime=23.4;
+   float  thrTime=1.56;
    //
   // Start from single digi recHits
   for ( auto digi = digiRange.first; digi != digiRange.second; ++digi ) {

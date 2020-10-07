@@ -30,7 +30,7 @@ RPCClusterContainer RPCClusterizer::doAction(const RPCDigiCollection::Range& dig
       // Close the previous cluster and start new cluster
       finalCluster.insert(prev);
       prev = *cl;
- //     std::cout<<"**************prev.time() ="<<prev.time()<<std::endl;
+      std::cout<<"**************prev.time() ="<<prev.time()<<std::endl;
 
     
     }
